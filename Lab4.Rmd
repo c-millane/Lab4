@@ -1,6 +1,6 @@
 ---
 title: "Lab4"
-author: "Cecilia Millane"
+author: "Cecilia Millane, Josh Zimmerman, Allie Tucker"
 date: "3/1/2018"
 output: html_document
 ---
