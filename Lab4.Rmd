@@ -10,7 +10,50 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
+library(tidyverse)
+library(dplyr)
+library(readr)
 av <- read.csv("http://raw.githubusercontent.com/fivethirtyeight/data/master/avengers/avengers.csv", stringsAsFactors = FALSE)
 
-av
+deaths <- av %>% gather(key = TimeD, value = Death, 11,13,15,17,19)
+
+deaths <- deaths %>% mutate(TimeD = parse_number(TimeD))
+
+returns <- ave %>% gather(key = TimeR, value = Return, 11:15)
+
+returns <- returns %>% mutate(TimeR = parse_number(TimeR))
+
+ave
 ```
+
+What’s more, if you’re a fan of the MCU, nobody is safe. Of the nine Avengers we see on screen — Iron Man, Hulk, Captain America, Thor, Hawkeye, Black Widow, Scarlet Witch, Quicksilver and The Vision — every single one of them has died at least once in the course of their time Avenging in the comics. In fact, Hawkeye died twice!
+- Although I was unable to find some of the superheros, I was able to verify that of the characters I could find, they all died at least twice, with Hawkeye dying twice
+
+```{r}
+deaths %>% filter(Name.Alias == 'Anthony Edward "Tony" Stark') %>% count(Death)
+
+deaths %>% filter(Name.Alias == "Robert Bruce Banner") %>% count(Death)
+
+deaths %>% filter(Name.Alias == 'Steven Rogers') %>% count(Death)
+
+deaths %>% filter(Name.Alias == "Thor Odinson") %>% count(Death)
+
+deaths %>% filter(Name.Alias == 'Clinton Francis Barton') %>% count(Death)
+
+deaths %>% filter(Name.Alias == 'Wanda Maximoff') %>% count(Death)
+```
+
+
+**Out of 173 listed Avengers, my analysis found that 69 had died at least one time after they joined the team. **
+  
+  
+```{r}
+deaths %>% filter(TimeD==1) %>% count(Death)
+
+deaths %>% filter(TimeD==1) %>% count()
+
+```
+
+
+
+**This shows that 69 had died at least once and that there are 173 Avengers.**
